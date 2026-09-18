@@ -1,18 +1,14 @@
 let goles = 0;
 
+function pedirDato(mensaje) {
+    return parseInt(prompt(mensaje));
+}
+
 function anotarGoles(cantidadGoles) {
     for (let i = 1; i <= cantidadGoles; i++) {
         goles++;
     }
     return goles;
-}
-
-function golesEsperados(objetivo) {
-    if (goles >= objetivo) {
-        alert("Felicitaciones, alcanzaste el objetivo");
-    } else {
-        alert(`Todavia te faltan ${objetivo - goles} goles para alcanzar el objetivo`);
-    }
 }
 
 const simularTemporada = (partidos, golesPorPartido) => {
@@ -21,8 +17,23 @@ const simularTemporada = (partidos, golesPorPartido) => {
     }
 }
 
-const golesPorPartido = parseInt(prompt("Ingrese la cantidad de goles por partido: "));
+function mostrarResultado(objetivo) {
+    if (goles >= objetivo) {
+        alert("Felicitaciones, alcanzaste el objetivo de " + objetivo + " goles");
+    } else {
+        alert("Todavia te faltan " + (objetivo - goles) + " goles para alcanzar el objetivo");
+    }
+}
 
-simularTemporada(38, golesPorPartido);
-golesEsperados(77);
-console.log(`Goles anotados en la temporada: ${38 * golesPorPartido}`);
+const partidosJugados = pedirDato("Ingrese la cantidad de partidos jugados en la temporada: ");
+const golesPorPartido = pedirDato("Ingrese la cantidad de goles convertidos por partido: ");
+const objetivoGoles = pedirDato("Ingrese el objetivo de goles para la temporada: ");
+
+simularTemporada(partidosJugados, golesPorPartido);
+
+mostrarResultado(objetivoGoles);
+
+console.log("Partidos jugados: " + partidosJugados);
+console.log("Goles por partido: " + golesPorPartido);
+console.log("Objetivo de goles: " + objetivoGoles);
+console.log("Total de goles anotados: " + goles);
